@@ -2,7 +2,7 @@ from typing import List
 
 from pytest import fixture
 
-from sorting import bubble_sort, selection_sort, merge_sort
+from sorting import bubble_sort, selection_sort, merge_sort, quick_sort
 
 
 @fixture
@@ -31,4 +31,9 @@ def test_selection_sort(numbers):
 
 def test_merge_sort(numbers):
     merge_sort(numbers)
+    assert is_ascending(numbers)
+
+
+def test_quick_sort(numbers):
+    quick_sort(numbers)
     assert is_ascending(numbers)

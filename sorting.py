@@ -1,4 +1,5 @@
 from typing import List, Optional
+from random import randint
 
 from searching import locate_min
 
@@ -50,3 +51,33 @@ def merge_sort(array: List, start: Optional[int] = None, stop: Optional[int] = N
         else:
             array[k] = helper[j]
             j += 1
+
+
+def quick_sort(array: List, left: Optional[int] = None, right: Optional[int] = None) -> None:
+    if left is None:
+        left = 0
+    if right is None:
+        right = len(array) - 1
+
+    index = _partition(array, left, right)
+
+    if left < index - 1:
+        quick_sort(array, left, index - 1)
+    if index < right:
+        quick_sort(array, index, right)
+
+
+def _partition(array: List, left: int, right: int) -> int:
+    pivot = array[randint(left, right)]
+    while left <= right:
+        while array[left] < pivot:
+            left += 1
+        while array[right] > pivot:
+            right -= 1
+
+        if left <= right:
+            array[left], array[right] = array[right], array[left]
+            left += 1
+            right -= 1
+
+    return left
